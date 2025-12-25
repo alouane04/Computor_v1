@@ -4,44 +4,28 @@ from typing import TypedDict
 from polynomial import Parts_linkedList
 from parsing import get_coefficients, parse_equation
 from solvers import solve_equation
-
-
-def check_syntax(equation_str):
-    # Check for empty equals (nothing on one side)
-    if equation_str.startswith("=") or equation_str.endswith("="):
-        raise ValueError("Syntax Error: Equation cannot start or end with '='.")
-    
-    # Check for double operators (simple check)
-    bad_sequences = ["**", "^^", "++", "--", "..", "^*", "*^"]
-    for bad in bad_sequences:
-        if bad in equation_str:
-            raise ValueError(f"Syntax Error: Invalid sequence '{bad}' found.")
-
-
-def check_vocabulary(equation_str):
-    # Allow: digits, space, dot, +, -, *, =, ^, X, x
-    # The pattern ^[...]+$ means "Start to End, only these chars allowed"
-    allowed_pattern = r"^[0-9xX\+\-\*\^=\.\s]+$"
-    
-    if not re.match(allowed_pattern, equation_str):
-        print("Error: Input contains invalid characters (Vocabulary Error).")
-        sys.exit(0)
+from utils import check_syntax, check_vocabulary, help_option
 
 
 if __name__ == "__main__":
     try:
-        if len(sys.argv) > 1:
+        if len(sys.argv) == 2:
             equation = sys.argv[1]
+        elif len(sys.argv) > 2:
+            print("Wrong number of argument give less")
         else:
-            print("No equation was given waiting in the STDIN")
+            print("No equation was given waiting in the STDIN -- -h or -help for usage")
             equation = input()
 
-        # equation = "2 * X^2 + 5 * X + 2 = 0"
+
+        if equation == "-h" or equation == "-help":
+            help_option()
+            exit(0)
+
+        parts_list = Parts_linkedList()
 
         check_syntax(equation)
         check_vocabulary(equation)
-
-        parts_list = Parts_linkedList()
 
         if "=" in equation:
             left_eq, right_eq = equation.split("=")
