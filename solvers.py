@@ -34,6 +34,14 @@ def format_fraction(numerator: int | float, denominator: int | float):
 
 
 def linear_equation(b, c):
+    print("\n--- Step 1: Isolate the Variable ---")
+    print(f"Equation: {b} * X + {c} = 0")
+    print(f"Move constant to RHS: {b} * X = {-c}")
+
+    print("\n--- Step 2: Divide by Coefficient ---")
+    print(f"X = {-c} / {b}")
+
+    # The third part
     print("The solution is:")
     # res = -c / b
     print(format_fraction(-c, b))
@@ -41,10 +49,24 @@ def linear_equation(b, c):
 
 # def quadratic_equation(a: float, b: float, c: float) -> tuple | float | None:
 def quadratic_equation(a: float, b: float, c: float):
+    print("\n--- Step 1: Calculate Discriminant ---")
+    print("Formula: Delta = b^2 - 4ac")
+    print(f"Delta = ({b})^2 - 4 * ({a}) * ({c})")
+
     delta = b ** 2 - 4 * a * c
+
+    print(f"Delta = {b**2} - {4*a*c}")
+    print(f"Delta = {delta}")
 
     if delta > 0:
         if delta.is_integer():
+            print("\n--- Step 2: Calculate Roots (Delta > 0) ---")
+            print(f"sqrt(Delta) = {delta ** 0.5:.4f}")
+            print("x1 = (-b - sqrt_delta) / (2a)")
+            print(f"x1 = ({-b} - {delta ** 0.5:.4f}) / ({2 * a})")
+            print(f"x2 = ({-b} + sqrt_delta) / (2a)")
+            print(f"x2 = ({-b} + {delta ** 0.5:.4f}) / ({2 * a})")
+
             print(f"Discriminant is strictly positive, the two solutions are:")
             # Solution 1: (-b - sqrt) / 2a
             num1 = -b - delta ** 0.5
@@ -56,12 +78,25 @@ def quadratic_equation(a: float, b: float, c: float):
             den2 = 2 * a
             print(format_fraction(num2, den2))
         else:
+            print("\n--- Step 2: Calculate Roots (Delta > 0) ---")
+            print(f"sqrt(Delta) = {delta ** 0.5:.4f}")
+            print("x1 = (-b - sqrt_delta) / (2a)")
+            print(f"x1 = ({-b} - {delta ** 0.5:.4f}) / ({2 * a})")
+            print(f"x2 = ({-b} + sqrt_delta) / (2a)")
+            print(f"x2 = ({-b} + {delta ** 0.5:.4f}) / ({2 * a})")
+
+            print(f"Discriminant is strictly positive, the two solutions are:")
             # we got two real solutions
             x1 = (-b + delta ** 0.5) / (2 * a)
             x2 = (-b - delta ** 0.5) / (2 * a)
             print(f"Discriminant is strictly positive, the two solutions are:\n{x2:.6f}\n{x1:.6f}")
 
     elif delta == 0:
+        print("\n--- Step 2: Calculate one Root (Delta == 0) ---")
+        print("since delta is 0 we won't need to mentioned it")
+
+        print(f"x = ({-b} / (2a)")
+        print(f"x = ({-b} / ({2 * a})")
         # we got one real solution
         # x = (-b + delta ** 0.5) / (2 * a)
         num = -b
@@ -76,6 +111,13 @@ def quadratic_equation(a: float, b: float, c: float):
     #     print(f"Discriminant is strictly negative, the two complex solutions are:\n{x1}\n{x2}\n")
     #     # return None
     else:
+        print("\n--- Step 2: Calculate Complex Roots (Delta < 0) ---")
+        print("Since Delta is negative, we have complex solutions.")
+        print("Formula: x = (-b / 2a) ± (sqrt(|Delta|) / 2a) * i")
+
+        print(f"\nReal Part: -b / 2a = {-b} / {2 * a}")
+        print(f"Imaginary Part: sqrt({abs(delta)}) / 2a = {abs(delta) ** 0.5:.4f} / {2 * a}")
+
         real_part = -b / (2 * a)
         # print("***real_part is", real_part)
         imaginary_part = (-delta) ** 0.5 / (2 * a)
